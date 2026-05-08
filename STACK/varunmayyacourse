@@ -1,0 +1,38 @@
+ssh -i "mykey.pem" ec2-user@VM1_Public_IP
+Step 2: Copy Key File to VM1
+
+Open new terminal on laptop:
+
+scp -i "mykey.pem" mykey.pem ec2-user@VM1_Public_IP:~
+Step 3: Give Permission to Key
+
+Inside VM1:
+
+chmod 400 mykey.pem
+Step 4: Create Sample File
+
+Inside VM1:
+
+echo "Hello from VM1" > test.txt
+Step 5: Transfer File from VM1 to VM2
+
+Inside VM1:
+
+scp -i mykey.pem test.txt ec2-user@VM2_Public_IP:~
+Step 6: Verify in VM2
+
+From laptop:
+
+ssh -i "mykey.pem" ec2-user@VM2_Public_IP
+
+Check file:
+
+ls
+
+Open file:
+
+cat test.txt
+
+Expected Output:
+
+Hello from VM1
