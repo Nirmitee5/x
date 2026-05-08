@@ -1,0 +1,130 @@
+Step 1 — Open AWS Lambda
+
+Open:
+
+AWS Lambda Console
+
+Step 2 — Create Lambda Function
+
+Click:
+
+Create Function
+
+Choose:
+
+Author from scratch
+
+Fill details:
+
+Field	Value
+Function Name	s3-nodejs-trigger
+Runtime	Node.js 22.x
+
+Leave everything else default.
+
+Click:
+
+Create Function
+Step 3 — Open Code Editor
+
+Inside Lambda function page:
+
+Scroll down to:
+
+Code
+
+You’ll see file:
+
+index.mjs
+Step 4 — Remove Default Code
+
+Delete all existing sample code.
+
+Step 5 — Paste This Node.js Code
+export const handler = async (event) => {
+
+  const record = event.Records[0];
+
+  const bucketName = record.s3.bucket.name;
+  const fileName = record.s3.object.key;
+
+  console.log(`Bucket Name: ${bucketName}`);
+  console.log(`Uploaded File: ${fileName}`);
+
+  return {
+      statusCode: 200,
+      body: JSON.stringify("File uploaded successfully")
+  };
+};
+Step 6 — Deploy Lambda
+
+Click:
+
+Deploy
+
+(top-right above code editor)
+
+Without deploy:
+
+new code will not execute.
+Step 7 — Create S3 Bucket
+
+Open:
+
+Amazon S3 Console
+
+Click:
+
+Create bucket
+Step 8 — Enter Bucket Details
+
+Bucket name example:
+
+first-buckyyy
+
+(choose unique name)
+
+Keep all settings default.
+
+Click:
+
+Create bucket
+Step 9 — Connect S3 Trigger to Lambda
+
+Go back to Lambda function.
+
+At top:
+
+Function Overview
+
+Click:
+
++ Add Trigger
+Step 10 — Configure Trigger
+
+Choose:
+
+S3
+
+Then:
+
+Field	Value
+Bucket	Select your bucket
+Event Type	All object create events
+
+Check:
+
+I acknowledge recursive invocation
+
+Click:
+
+Add
+Step 11 — Upload File into S3
+
+Go to your S3 bucket.
+
+Click:
+
+Upload
+
+Choose any file:
