@@ -128,3 +128,20 @@ Click:
 Upload
 
 Choose any file:
+
+
+
+
+
+http
+export const handler = async (event) => {
+
+    console.log("HTTP Request Received");
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify({
+            message: "Lambda triggered successfully using HTTP call!"
+        }),
+    };
+};
